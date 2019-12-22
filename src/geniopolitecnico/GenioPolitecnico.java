@@ -4,18 +4,32 @@
  * and open the template in the editor.
  */
 package geniopolitecnico;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /**
  *
  * @author CLOJA
  */
-public class GenioPolitecnico {
-
+public class GenioPolitecnico extends Application{
+	
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        launch(args);
     }
+
+	@Override
+	public void start(Stage primaryStage){
+		
+		Scene escenaInicio = new Scene( new Inicio().getRoot(),300,400);
+		
+		primaryStage.setScene(escenaInicio);
+		
+		primaryStage.show();
+		
+	}
     
 }
