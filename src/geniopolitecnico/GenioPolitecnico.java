@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package geniopolitecnico;
+import interfaces.Inicio;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
