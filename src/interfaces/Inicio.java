@@ -7,27 +7,35 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 public class Inicio {
 	private StackPane root = new StackPane();
 
-	private ImageView fondo = new ImageView(new Image("/imagenes/fondoDePrueba.png"));
+	private ImageView fondo = new ImageView(new Image("/imagenes/fondoInicio.jpg"));
 
 	private VBox VBoxBienvenida = new VBox(20);
 
 	private Label labelGenioPolitecnico = new Label("Genio Politécnico");
 
-	private ImageView imagenGenio = new ImageView(new Image("/imagenes/genioInicio.png"));
+	private ImageView imagenGenio = new ImageView(new Image("/imagenes/genio2.png"));
 
 	private Label labelPensar = new Label("Piense en un animal, trataré de adivinarlo");
 
 	private Button jugar = new Button("Jugar");
 
 	public Inicio() {
+		
 		organizarElementos();
 		centralizarNodos();
 		ajustarTamanoImagenes();
-
+		colorearTextoLabels();
+		establecerFuenteLabels();
+		decorarBoton();
+		establecerOpacidad();
+		alinearLabels();
+		ajustarTamanoLabels();
+	
 	}
 
 	//METODOS
@@ -44,11 +52,40 @@ public class Inicio {
 	}
 	
 	private void ajustarTamanoImagenes() {
-		imagenGenio.setFitHeight(100);
+		imagenGenio.setFitHeight(200);
 		imagenGenio.setFitWidth(100);
 		fondo.setFitHeight(400);
 		fondo.setFitWidth(300);
 	}
+	
+	private void colorearTextoLabels() {
+		labelGenioPolitecnico.setStyle("-fx-text-fill:white;-fx-font-weight:bold;-fx-background-color:deeppink;-fx-border-color:bisque");
+		labelPensar.setStyle("-fx-text-fill:white;-fx-font-weight:bold;-fx-background-color:deeppink;-fx-border-color:bisque");
+	
+	}
+	private void establecerFuenteLabels() {
+		labelGenioPolitecnico.setFont(new Font("Arial",14));
+		labelPensar.setFont(new Font("Arial",14));
+	}
+	private void decorarBoton() {
+		jugar.setStyle("-fx-font-weight:bold;-fx-base:royalblue;-fx-font-size:14;-fx-text-fill:white;-fx-border-color:aliceblue");
+	}
+	private void establecerOpacidad() {
+		imagenGenio.setOpacity(0.8);
+		labelPensar.setOpacity(0.85);
+		labelGenioPolitecnico.setOpacity(0.85);
+	}
+	private void alinearLabels() {
+		labelGenioPolitecnico.setAlignment(Pos.CENTER);
+		labelPensar.setAlignment(Pos.CENTER);
+	}
+	private void ajustarTamanoLabels() {
+		labelGenioPolitecnico.setMinWidth(305);
+		labelPensar.setMinWidth(305);
+		
+	}
+	
+
 
 
 

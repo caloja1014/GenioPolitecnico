@@ -5,6 +5,7 @@
  */
 package geniopolitecnico;
 import interfaces.Inicio;
+import interfaces.Preguntas;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -25,9 +26,11 @@ public class GenioPolitecnico extends Application{
 	@Override
 	public void start(Stage primaryStage){
 		
-		Scene escenaInicio = new Scene( new Inicio().getRoot(),300,400);
+		Scene escenaInicio = new Scene( new Preguntas().getRoot(),300,400);
 		
 		primaryStage.setScene(escenaInicio);
+		
+		
 		
 		primaryStage.show();
 		
