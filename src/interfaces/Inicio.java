@@ -64,11 +64,11 @@ public class Inicio {
 	
 	}
 	private void establecerFuenteLabels() {
-		labelGenioPolitecnico.setFont(new Font("Arial",14));
-		labelPensar.setFont(new Font("Arial",14));
+		labelGenioPolitecnico.setFont(new Font("Tahoma",14));
+		labelPensar.setFont(new Font("Tahoma",14));
 	}
 	private void decorarBoton() {
-		jugar.setStyle("-fx-font-weight:bold;-fx-base:royalblue;-fx-font-size:14;-fx-text-fill:white;-fx-border-color:aliceblue");
+		jugar.setStyle("-fx-font-weight:bold;-fx-base:royalblue;-fx-font-size:14;-fx-text-fill:white;-fx-border-color:aliceblue;-fx-font-family:Tahoma");
 	}
 	private void establecerOpacidad() {
 		imagenGenio.setOpacity(0.8);

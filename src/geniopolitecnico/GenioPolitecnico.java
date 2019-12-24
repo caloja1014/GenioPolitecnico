@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package geniopolitecnico;
+import interfaces.Acierto;
 import interfaces.Inicio;
 import interfaces.Preguntas;
 import javafx.application.Application;
@@ -26,11 +27,9 @@ public class GenioPolitecnico extends Application{
 	@Override
 	public void start(Stage primaryStage){
 		
-		Scene escenaInicio = new Scene( new Preguntas().getRoot(),300,400);
+		Scene escenaInicio = new Scene( new Acierto().getRoot(),300,400);
 		
 		primaryStage.setScene(escenaInicio);
-		
-		
 		
 		primaryStage.show();
 		

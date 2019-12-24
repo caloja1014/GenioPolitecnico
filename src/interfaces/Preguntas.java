@@ -32,7 +32,7 @@ public class Preguntas {
 		ajustarTamanoImagenes();
 		ajustarTamanoLabels();
 		centralizarTextoEnLabels();
-		colorearLabels();
+		decorarLabels();
 		establecerFuenteLabels();
 	}
 	
@@ -67,11 +67,11 @@ public class Preguntas {
 		no.setAlignment(Pos.CENTER);
 	}
 	
-	private void colorearLabels() {
+	private void decorarLabels() {
 	
-		pregunta.setStyle("-fx-background-color:saddlebrown; -fx-border-color:white;-fx-text-fill:white");
-		si.setStyle("-fx-background-color:darkgoldenrod; -fx-border-color:white;-fx-text-fill:white");
-		no.setStyle("-fx-background-color:darkgoldenrod; -fx-border-color:white; -fx-text-fill:white");
+		pregunta.setStyle("-fx-background-color:saddlebrown; -fx-border-color:white;-fx-text-fill:white;-fx-font-family:Tahoma;-fx-font-size: 14px;-fx-font-weight: bold");
+		si.setStyle("-fx-background-color:darkgoldenrod; -fx-border-color:white;-fx-text-fill:white;-fx-font-family:Tahoma;-fx-font-size: 14px;-fx-font-weight: bold");
+		no.setStyle("-fx-background-color:darkgoldenrod; -fx-border-color:white; -fx-text-fill:white;-fx-font-family:Tahoma;-fx-font-size: 14px;-fx-font-weight: bold");
 			
 	}
 	
