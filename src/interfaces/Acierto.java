@@ -52,7 +52,9 @@ public class Acierto {
                 no.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
+                        GenioPolitecnico.arbol.guardarArbol();
                         GenioPolitecnico.stage.close();
+                        
                     }
                 });
 	}

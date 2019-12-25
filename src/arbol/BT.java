@@ -6,6 +6,12 @@
  */
 package arbol;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author CltControl
@@ -118,6 +124,33 @@ public class BT <E> {
             posOrden(n.getLeft());
             posOrden(n.getRight());
             System.out.println(n.getData());
+        }
+    }
+        
+    public void guardarArbol() {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/data/arbol.txt"))) {
+            guardarArbol(root);
+        } catch (IOException ex) {
+            Logger.getLogger(BT.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void guardarArbol(Node<E> n) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/data/arbol.txt", true))) {
+            if (n != null) {
+                guardarArbol(n.getLeft());
+                guardarArbol(n.getRight());
+      
+                if(n.isHoja())
+                    bw.write("#R "+ (String) n.getData());
+                else{
+                    bw.write("#P "+ (String) n.getData());
+                }
+                if(n!=root)
+                    bw.newLine();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(BT.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
