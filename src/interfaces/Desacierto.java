@@ -133,8 +133,9 @@ public class Desacierto {
 	}
 	public void addPreguntaArbol(String raiz,String s){
                 boolean isLeft=GenioPolitecnico.arbol.remove(raiz);
-                System.out.println(" separacion          ");
                 
+                //System.out.println(" separacion          "+"esto es p"+p+"  esto es raiz"+raiz);
+                //System.out.println("el boolean es:  "+isLeft);
                 if (!isLeft){
                     if (s.equals("si")){
                         GenioPolitecnico.arbol.addRight(textFieldPregunta.getText(), p);
@@ -159,7 +160,7 @@ public class Desacierto {
                         GenioPolitecnico.arbol.addLeft(raiz, textFieldPregunta.getText());
                     }
                 }
-                GenioPolitecnico.arbol.posOrden();
+                //GenioPolitecnico.arbol.posOrden();
         }
 	
 

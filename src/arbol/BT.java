@@ -97,6 +97,7 @@ public class BT <E> {
     public boolean remove(E data){
         Node<E> n= searchNode(data, root);
         boolean b=n.isIsLeft();
+        //System.out.println("booleano del remove" + b+ "el dato a remover es: "+ n.getData());
         n=null;
         return b;
     }

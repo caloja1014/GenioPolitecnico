@@ -56,12 +56,13 @@ public class Preguntas {
 
     private void iterarPreguntas() {
         pregunta = new Label(raiz.getData());
-        
             si.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                
                 @Override
                 public void handle(MouseEvent event) {
-                    Platform.runLater(() -> pregunta.setText(raiz.getData()));
-                    if(raiz.getLeft()==null && raiz.getRight()==null) {
+                            
+
+                    if(raiz.isHoja()) {
                         
                         Acierto acierto= new Acierto();
                
@@ -72,16 +73,26 @@ public class Preguntas {
                         
                     }
                     
-                    else
+                    else{
+                        p=raiz.getData();
                     raiz = raiz.getLeft();
+                    raiz.getLeft();
+                                        System.out.println(raiz.isIsLeft());
+
+                    Platform.runLater(() -> pregunta.setText(raiz.getData()));
+                
+                    }
                 }
 
             });
             no.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                
                 @Override
                 public void handle(MouseEvent event) {
                     
-                    if(raiz.getLeft()==null && raiz.getRight()==null) {
+                            
+
+                    if(raiz.isHoja()) {
                         
                         Desacierto desacierto= new Desacierto(raiz,p);
                
@@ -95,6 +106,8 @@ public class Preguntas {
                     else{
                         p=raiz.getData();
                         raiz = raiz.getRight();
+                                            System.out.println(raiz.isIsLeft());
+
                         Platform.runLater(() -> pregunta.setText(raiz.getData()));
 
                     
