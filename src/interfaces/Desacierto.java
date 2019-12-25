@@ -1,5 +1,6 @@
 package interfaces;
 
+import arbol.Node;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,7 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-
+import geniopolitecnico.GenioPolitecnico;
+import javafx.scene.Scene;
 public class Desacierto {
 	private VBox root = new VBox();
 	
@@ -22,9 +24,9 @@ public class Desacierto {
 	
 	private FlowPane flowAyudarPrediccion = new FlowPane();
 	
-	private Label labelAyudame = new Label("¡Ayúdame a mejorar mi predicción!");
+	private Label labelAyudame = new Label("ï¿½Ayï¿½dame a mejorar mi predicciï¿½n!");
 	
-	private Label labelPensando = new Label("¿Qué animal estabas pensando?");
+	private Label labelPensando = new Label("ï¿½Quï¿½ animal estabas pensando?");
 	
 	private TextField textFieldPensando = new TextField();
 	
@@ -32,23 +34,27 @@ public class Desacierto {
 	
 	private TextField textFieldPregunta = new TextField();
 	
-	private Label labelSiNo = new Label("¿Para un X, la respuesta a la pregunta: W?,\n es sí o no?");
+	private Label labelSiNo = new Label("ï¿½Para un X, la respuesta a la pregunta: W?,\n es sï¿½ o no?");
 	
-	private RadioButton si = new RadioButton("Sí");
+	private RadioButton si = new RadioButton("SI");
 	
 	private RadioButton no = new RadioButton("No");
 	
 	private Button siguiente = new Button("Siguiente");
 	
-	
-	public Desacierto() {
-		organizarElementos();
+        private Node<String> parent;
+	private String p;
+	public Desacierto(Node<String> parent,String p) {
+            this.p=p;
+            this.parent=parent;
+                organizarElementos();
 		ajustarTamanoNodos();
 		centralizarNodos();
 		decorarLabels();
 		colocarPromptsEnTextFields();
-		
-		
+                si.setOnMouseClicked(e-> addPreguntaArbol(parent.getData(), "si"));
+		no.setOnMouseClicked(e-> addPreguntaArbol(parent.getData(), "no"));
+                siguiente.setOnAction(e->cambiarVentana());
 	}
 	private void organizarElementos() {
 		root.getChildren().addAll(stackPaneFondo,flowAyudarPrediccion);
@@ -57,7 +63,11 @@ public class Desacierto {
 		
 		
 	}
-	
+	public void cambiarVentana(){
+                Preguntas preguntas=new Preguntas();
+		Scene escena= new Scene( preguntas.getRoot(),300,400);
+                GenioPolitecnico.stage.setScene(escena);
+        }
 	private void ajustarTamanoNodos() {
 		fondo.setFitWidth(300);
 		fondo.setFitHeight(150);
@@ -110,8 +120,8 @@ public class Desacierto {
 	
 	private void colocarPromptsEnTextFields() {
 		
-		textFieldPensando.setPromptText("Coloque aquí el nombre del animal");
-		textFieldPregunta.setPromptText("Coloque aquí la pregunta");
+		textFieldPensando.setPromptText("Coloque aquï¿½ el nombre del animal");
+		textFieldPregunta.setPromptText("Coloque aquï¿½ la pregunta");
 		
 	}
 	
@@ -121,7 +131,36 @@ public class Desacierto {
 		labelPregunta.setStyle("-fx-background-color:darkgoldenrod; -fx-border-color:white;-fx-text-fill:white;-fx-font-family:Tahoma;-fx-font-size: 12px;-fx-font-weight:bold");
 		labelSiNo.setStyle("-fx-background-color:darkgoldenrod; -fx-border-color:white;-fx-text-fill:white;-fx-font-family:Tahoma;-fx-font-size: 12px;-fx-font-weight:bold");
 	}
-	
+	public void addPreguntaArbol(String raiz,String s){
+                boolean isLeft=GenioPolitecnico.arbol.remove(raiz);
+                System.out.println(" separacion          ");
+                
+                if (!isLeft){
+                    if (s.equals("si")){
+                        GenioPolitecnico.arbol.addRight(textFieldPregunta.getText(), p);
+                        GenioPolitecnico.arbol.addLeft(textFieldPensando.getText(), textFieldPregunta.getText());
+                        GenioPolitecnico.arbol.addRight(raiz, textFieldPregunta.getText());   
+                    }
+                    else{
+                        GenioPolitecnico.arbol.addRight(textFieldPregunta.getText(), p);
+                        GenioPolitecnico.arbol.addRight(textFieldPensando.getText(), textFieldPregunta.getText());
+                        GenioPolitecnico.arbol.addLeft(raiz, textFieldPregunta.getText());
+                    }
+                }
+                else{
+                    if (s.equals("si")){
+                        GenioPolitecnico.arbol.addLeft(textFieldPregunta.getText(), p);
+                        GenioPolitecnico.arbol.addLeft(textFieldPensando.getText(), textFieldPregunta.getText());
+                        GenioPolitecnico.arbol.addRight(raiz, textFieldPregunta.getText());    
+                    }
+                    else{
+                        GenioPolitecnico.arbol.addLeft(textFieldPregunta.getText(), p);
+                        GenioPolitecnico.arbol.addRight(textFieldPensando.getText(), textFieldPregunta.getText());
+                        GenioPolitecnico.arbol.addLeft(raiz, textFieldPregunta.getText());
+                    }
+                }
+                GenioPolitecnico.arbol.posOrden();
+        }
 	
 
 	public VBox getRoot() {

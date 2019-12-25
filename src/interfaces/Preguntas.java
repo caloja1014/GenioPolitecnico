@@ -31,7 +31,7 @@ public class Preguntas {
     private ImageView imagenGenio = new ImageView(new Image("/imagenes/genio.png"));
 
     private FlowPane flowDePreguntas = new FlowPane();
-
+    private String p;
     private Label pregunta;
 
     private Label si = new Label("Si");
@@ -60,6 +60,7 @@ public class Preguntas {
             si.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
+                    Platform.runLater(() -> pregunta.setText(raiz.getData()));
                     if(raiz.getLeft()==null && raiz.getRight()==null) {
                         
                         Acierto acierto= new Acierto();
@@ -70,8 +71,8 @@ public class Preguntas {
 
                         
                     }
-                    Platform.runLater(() -> pregunta.setText(raiz.getData()));
                     
+                    else
                     raiz = raiz.getLeft();
                 }
 
@@ -79,10 +80,27 @@ public class Preguntas {
             no.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    Platform.runLater(() -> pregunta.setText(raiz.getData()));
-                    raiz = raiz.getRight();
-                }
+                    
+                    if(raiz.getLeft()==null && raiz.getRight()==null) {
+                        
+                        Desacierto desacierto= new Desacierto(raiz,p);
+               
+                        Scene escena= new Scene( desacierto.getRoot(),300,400);
+                        GenioPolitecnico.stage.setScene(escena);
+                        
 
+                        
+                    }
+                    
+                    else{
+                        p=raiz.getData();
+                        raiz = raiz.getRight();
+                        Platform.runLater(() -> pregunta.setText(raiz.getData()));
+
+                    
+                    }
+                }
+                
             });
     }
     

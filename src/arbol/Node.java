@@ -13,7 +13,7 @@ public class Node<E> {
     private E data;
     private Node<E> left;
     private Node<E> right;
-
+    private boolean isLeft;
     public Node(E data){
         this.data=data;
         left=right=null;
@@ -37,6 +37,7 @@ public class Node<E> {
      * @return the left
      */
     public Node<E> getLeft() {
+        this.isLeft=true;
         return left;
     }
 
@@ -47,10 +48,15 @@ public class Node<E> {
         this.left = left;
     }
 
+    public boolean isIsLeft() {
+        return isLeft;
+    }
+
     /**
      * @return the right
      */
     public Node<E> getRight() {
+        this.isLeft=false;
         return right;
     }
 

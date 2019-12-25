@@ -12,6 +12,7 @@ package arbol;
  */
 public class BT <E> {
     private Node<E> root;
+    boolean isLeft;
     public BT(){
         this.root=null;
     }
@@ -93,7 +94,12 @@ public class BT <E> {
                 return searchNode(data,n.getRight());
         }
     }
-
+    public boolean remove(E data){
+        Node<E> n= searchNode(data, root);
+        boolean b=n.isIsLeft();
+        n=null;
+        return b;
+    }
     public Node<E> getRoot() {
         return root;
     }
