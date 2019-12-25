@@ -1,13 +1,18 @@
 package interfaces;
 
+import geniopolitecnico.GenioPolitecnico;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+
 
 public class Acierto {
 
@@ -19,13 +24,13 @@ public class Acierto {
 	
 	private ImageView imagenGenio = new ImageView(new Image("/imagenes/genioAcierto.gif"));
 	
-	private Label labelAdivinar = new Label("¡He Adivinado!");
+	private Label labelAdivinar = new Label("ï¿½He Adivinado!");
 	
 	private FlowPane flowJugarDeNuevo = new FlowPane();
 	
-	private Label labelJugarDeNuevo = new Label("¿Quieres jugar de nuevo?");
+	private Label labelJugarDeNuevo = new Label("ï¿½Quieres jugar de nuevo?");
 	
-	private Label si = new Label("Sí");
+	private Label si = new Label("Sï¿½");
 	
 	private Label no = new Label("No");
 	
@@ -36,6 +41,20 @@ public class Acierto {
 		ajustarTamanoLabels();
 		centralizarTextoEnLabels();
 		decorarLabels();
+                si.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        Preguntas preguntas=new Preguntas();
+                        Scene escena= new Scene( preguntas.getRoot(),300,400);
+                        GenioPolitecnico.stage.setScene(escena);
+                    }
+                });
+                no.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        GenioPolitecnico.stage.close();
+                    }
+                });
 	}
 	
 	private void organizarElementos() {
@@ -79,6 +98,7 @@ public class Acierto {
 		no.setStyle("-fx-background-color:darkgoldenrod; -fx-border-color:white;-fx-text-fill:white;-fx-font-family:Tahoma;-fx-font-size: 14px;-fx-font-weight:bold");
 	}
 	
+        
 	//GETTERS & SETTERS
 
 	public VBox getRoot() {

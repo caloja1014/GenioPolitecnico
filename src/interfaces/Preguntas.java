@@ -6,6 +6,7 @@ import geniopolitecnico.GenioPolitecnico;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,11 +15,12 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 public class Preguntas {
 
     private BT<String> arbol = GenioPolitecnico.arbol;
-
+    private boolean cerrarStage;
     private Node<String> raiz = arbol.getRoot();
     private VBox root = new VBox();
 
@@ -58,7 +60,18 @@ public class Preguntas {
             si.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
+                    if(raiz.getLeft()==null && raiz.getRight()==null) {
+                        
+                        Acierto acierto= new Acierto();
+               
+                        Scene escena= new Scene( acierto.getRoot(),300,400);
+                        GenioPolitecnico.stage.setScene(escena);
+                        
+
+                        
+                    }
                     Platform.runLater(() -> pregunta.setText(raiz.getData()));
+                    
                     raiz = raiz.getLeft();
                 }
 
@@ -71,10 +84,8 @@ public class Preguntas {
                 }
 
             });
-
-        
-
     }
+    
 
    
     private void ajustarTamanoImagenes() {
@@ -182,5 +193,10 @@ public class Preguntas {
     public void setNo(Label no) {
         this.no = no;
     }
+
+    public boolean isCerrarStage() {
+        return cerrarStage;
+    }
+    
 
 }

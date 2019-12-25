@@ -21,6 +21,7 @@ import javafx.stage.Stage;
  */
 public class GenioPolitecnico extends Application{
 	public static BT<String> arbol=new BT<>();
+        public static Stage stage= new Stage();
     /**
      * @param args the command line arguments
      */
@@ -53,10 +54,10 @@ public class GenioPolitecnico extends Application{
                     }
                     
                 });
-		primaryStage.setScene(escena);
+		stage.setScene(escena);
 		
-		primaryStage.show();
-		
+		stage.show();
+                
 	}
     
 }
