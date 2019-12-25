@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,7 +19,30 @@ public class BT <E> {
     public boolean  isEmpty(){
         return root==null;
     }
-    
+    public boolean add(E child, E parent){
+        Node<E>nch=new Node<>(child);
+        if(child==null){
+            return false;
+        }
+        else if(isEmpty() && parent==null){
+            root=nch;
+            return true;
+        }else if(parent!=null){
+            if(searchNode(child)==null){
+                Node<E> np=searchNode(parent);
+                if(np==null || np.getLeft()!=null || np.getRight()!=null)
+                    return false;
+                else if(np.getLeft()==null)
+                    np.setLeft(nch);
+                else
+                    np.setRight(nch);
+                
+            }
+            return true;
+        }else{
+            return false;
+        }
+    }
     public boolean addLeft(E child, E parent){
         Node<E> nch= new Node<> (child);
         if (child== null)return false;
@@ -28,9 +52,12 @@ public class BT <E> {
         }
         else{
             Node<E> nadd=searchNode(parent);
-            nadd.setLeft(new Node<>(child));
-            
-            return true;
+            if(nadd!=null){
+                nadd.setLeft(new Node<>(child));
+                return true;
+            }
+            return false;
+ 
         }
     }
     public boolean addRight(E child, E parent){
@@ -42,9 +69,11 @@ public class BT <E> {
         }
         else{
             Node<E> nadd=searchNode(parent);
-            nadd.setRight(new Node<>(child));
-            
-            return true;
+            if(nadd!=null){
+                nadd.setRight(new Node<>(child));
+                return true;
+            }
+            return false;
         }
     }
     
@@ -64,5 +93,25 @@ public class BT <E> {
                 return searchNode(data,n.getRight());
         }
     }
+
+    public Node<E> getRoot() {
+        return root;
+    }
+
+    public void setRoot(Node<E> root) {
+        this.root = root;
+    }
     
+    public void posOrden(){
+        posOrden(root);
+        
+    }
+    public void posOrden(Node<E>n){
+        if(n!=null){
+            posOrden(n.getLeft());
+            posOrden(n.getRight());
+            System.out.println(n.getData());
+        }
+    }
 }
+

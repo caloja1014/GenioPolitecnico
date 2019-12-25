@@ -60,4 +60,7 @@ public class Node<E> {
     public void setRight(Node<E> right) {
         this.right = right;
     }
+    public boolean isHoja(){
+        return (left==null && right==null);
+    }
 }
