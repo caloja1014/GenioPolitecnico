@@ -3,6 +3,7 @@ package interfaces;
 import arbol.BT;
 import arbol.Node;
 import geniopolitecnico.GenioPolitecnico;
+import java.util.Stack;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -12,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -19,12 +21,13 @@ import javafx.stage.Stage;
 
 public class Preguntas {
 
+    private Stack<Node<String>> pila = new Stack<>();
     private BT<String> arbol = GenioPolitecnico.arbol;
     private boolean cerrarStage;
     private Node<String> raiz = arbol.getRoot();
     private VBox root = new VBox();
 
-    private StackPane stackDeFondo = new StackPane();
+    private Pane stackDeFondo = new Pane();
 
     private ImageView fondo = new ImageView(new Image("/imagenes/fondoPregunta.jpg"));
 
@@ -37,6 +40,8 @@ public class Preguntas {
     private Label si = new Label("Si");
 
     private Label no = new Label("No");
+
+    private Label regresar = new Label("Regresar");
 
     public Preguntas() {
         organizarElementos();
@@ -51,74 +56,90 @@ public class Preguntas {
         iterarPreguntas();
         root.getChildren().addAll(stackDeFondo, flowDePreguntas);
         stackDeFondo.getChildren().addAll(fondo, imagenGenio);
+        imagenGenio.setX(75);
+        imagenGenio.setY(75);
         flowDePreguntas.getChildren().addAll(pregunta, si, no);
     }
 
     private void iterarPreguntas() {
         pregunta = new Label(raiz.getData());
-            si.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                
-                @Override
-                public void handle(MouseEvent event) {
-                            
+        si.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-                    if(raiz.isHoja()) {
-                        
-                        Acierto acierto= new Acierto();
-               
-                        Scene escena= new Scene( acierto.getRoot(),300,400);
-                        GenioPolitecnico.stage.setScene(escena);
-                        
+            @Override
+            public void handle(MouseEvent event) {
+                pila.push(raiz);
+                if (raiz.isHoja()) {
 
-                        
-                    }
-                    
-                    else{
-                        p=raiz.getData();
+                    Acierto acierto = new Acierto();
+
+                    Scene escena = new Scene(acierto.getRoot(), 300, 400);
+                    GenioPolitecnico.stage.setScene(escena);
+
+                } else {
+                    p = raiz.getData();
                     raiz = raiz.getLeft();
                     raiz.getLeft();
-                                        System.out.println(raiz.isIsLeft());
+                    System.out.println(raiz.isIsLeft());
 
                     Platform.runLater(() -> pregunta.setText(raiz.getData()));
-                
-                    }
+
                 }
+                regresar();
+            }
 
-            });
-            no.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                
-                @Override
-                public void handle(MouseEvent event) {
-                    
-                            
+        });
+        no.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-                    if(raiz.isHoja()) {
-                        
-                        Desacierto desacierto= new Desacierto(raiz,p);
-               
-                        Scene escena= new Scene( desacierto.getRoot(),300,400);
-                        GenioPolitecnico.stage.setScene(escena);
-                        
+            @Override
+            public void handle(MouseEvent event) {
+                pila.push(raiz);
+                if (raiz.isHoja()) {
 
-                        
-                    }
-                    
-                    else{
-                        p=raiz.getData();
-                        raiz = raiz.getRight();
-                                            System.out.println(raiz.isIsLeft());
+                    Desacierto desacierto = new Desacierto(raiz, p);
 
-                        Platform.runLater(() -> pregunta.setText(raiz.getData()));
+                    Scene escena = new Scene(desacierto.getRoot(), 300, 400);
+                    GenioPolitecnico.stage.setScene(escena);
 
-                    
-                    }
+                } else {
+                    p = raiz.getData();
+                    raiz = raiz.getRight();
+                    System.out.println(raiz.isIsLeft());
+
+                    Platform.runLater(() -> pregunta.setText(raiz.getData()));
+
                 }
-                
-            });
+                regresar();
+            }
+
+        });
     }
-    
 
-   
+    public void regresar() {
+        if (!stackDeFondo.getChildren().contains(regresar)) {
+            stackDeFondo.getChildren().add(regresar);
+        }
+        regresar.setLayoutX(225);
+        regresar.setLayoutY(230);
+        regresar.setAlignment(Pos.CENTER);
+        regresar.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                if (!pila.isEmpty()) {
+                    raiz = pila.pop();
+
+                    Platform.runLater(() -> pregunta.setText(raiz.getData()));
+                    if (raiz == arbol.getRoot()) {
+                        stackDeFondo.getChildren().remove(regresar);
+                    }
+                }
+
+            }
+
+        });
+
+    }
+
     private void ajustarTamanoImagenes() {
         imagenGenio.setFitHeight(150);
         imagenGenio.setFitWidth(150);
@@ -135,6 +156,9 @@ public class Preguntas {
 
         no.setMinWidth(150);
         no.setMinHeight(60);
+        
+        regresar.setMinWidth(75);
+        regresar.setMinHeight(40);
 
     }
 
@@ -149,6 +173,7 @@ public class Preguntas {
         pregunta.setStyle("-fx-background-color:saddlebrown; -fx-border-color:white;-fx-text-fill:white;-fx-font-family:Tahoma;-fx-font-size: 14px;-fx-font-weight: bold");
         si.setStyle("-fx-background-color:darkgoldenrod; -fx-border-color:white;-fx-text-fill:white;-fx-font-family:Tahoma;-fx-font-size: 14px;-fx-font-weight: bold");
         no.setStyle("-fx-background-color:darkgoldenrod; -fx-border-color:white; -fx-text-fill:white;-fx-font-family:Tahoma;-fx-font-size: 14px;-fx-font-weight: bold");
+        regresar.setStyle("-fx-background-color:beige; -fx-border-color:white; -fx-text-fill:brown;-fx-font-family:Tahoma;-fx-font-size: 14px;-fx-font-weight: bold");
 
     }
 
@@ -157,7 +182,7 @@ public class Preguntas {
         pregunta.setFont(new Font("Arial", 14));
         si.setFont(new Font("Arial", 14));
         no.setFont(new Font("Arial", 14));
-
+        regresar.setFont(new Font("Arial", 10));
     }
 
     //GETTERS & SETTERS
@@ -169,7 +194,7 @@ public class Preguntas {
         this.root = root;
     }
 
-    public StackPane getStackDeFondo() {
+    public Pane getStackDeFondo() {
         return stackDeFondo;
     }
 
@@ -228,6 +253,5 @@ public class Preguntas {
     public boolean isCerrarStage() {
         return cerrarStage;
     }
-    
 
 }
