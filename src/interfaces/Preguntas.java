@@ -16,6 +16,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -25,6 +27,8 @@ public class Preguntas {
     private BT<String> arbol = GenioPolitecnico.arbol;
     private boolean cerrarStage;
     private Node<String> raiz = arbol.getRoot();
+    
+    
     private VBox root = new VBox();
 
     private Pane stackDeFondo = new Pane();
@@ -36,6 +40,8 @@ public class Preguntas {
     private FlowPane flowDePreguntas = new FlowPane();
     private String p;
     private Label pregunta;
+    
+    private Rectangle fondoOjos= new Rectangle(10,10);
 
     private Label si = new Label("Si");
 
@@ -50,12 +56,13 @@ public class Preguntas {
         centralizarTextoEnLabels();
         decorarLabels();
         establecerFuenteLabels();
+        colocarRectangulo();
     }
 
     private void organizarElementos() {
         iterarPreguntas();
         root.getChildren().addAll(stackDeFondo, flowDePreguntas);
-        stackDeFondo.getChildren().addAll(fondo, imagenGenio);
+        stackDeFondo.getChildren().addAll(fondo, fondoOjos,imagenGenio);
         imagenGenio.setX(75);
         imagenGenio.setY(75);
         flowDePreguntas.getChildren().addAll(pregunta, si, no);
@@ -185,6 +192,13 @@ public class Preguntas {
         si.setFont(new Font("Arial", 14));
         no.setFont(new Font("Arial", 14));
         regresar.setFont(new Font("Arial", 10));
+    }
+    
+    private void colocarRectangulo() {
+    	fondoOjos.setFill(Color.WHITE);
+    	fondoOjos.setLayoutX(131);
+    	fondoOjos.setLayoutY(90);
+    	
     }
 
     //GETTERS & SETTERS
