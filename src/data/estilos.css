@@ -1,0 +1,8 @@
+#si :hover{
+    -fx-background-color:pink; 
+    -fx-font-size: 25px;
+}
+
+#no :hover{
+    -fx-font-size: 25px;
+}

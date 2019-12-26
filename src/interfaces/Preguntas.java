@@ -153,9 +153,11 @@ public class Preguntas {
 
         si.setMinWidth(150);
         si.setMinHeight(60);
-
+        si.setId("si");
+        
         no.setMinWidth(150);
         no.setMinHeight(60);
+        no.setId("no");
         
         regresar.setMinWidth(75);
         regresar.setMinHeight(40);

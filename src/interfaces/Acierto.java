@@ -24,13 +24,13 @@ public class Acierto {
 	
 	private ImageView imagenGenio = new ImageView(new Image("/imagenes/genioAcierto.gif"));
 	
-	private Label labelAdivinar = new Label("�He Adivinado!");
+	private Label labelAdivinar = new Label("He Adivinado!");
 	
 	private FlowPane flowJugarDeNuevo = new FlowPane();
 	
-	private Label labelJugarDeNuevo = new Label("�Quieres jugar de nuevo?");
+	private Label labelJugarDeNuevo = new Label("Quieres jugar de nuevo?");
 	
-	private Label si = new Label("S�");
+	private Label si = new Label("Si");
 	
 	private Label no = new Label("No");
 	

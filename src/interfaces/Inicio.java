@@ -16,11 +16,11 @@ public class Inicio {
 
 	private VBox VBoxBienvenida = new VBox(20);
 
-	private Label labelGenioPolitecnico = new Label("Genio Politécnico");
+	private Label labelGenioPolitecnico = new Label("Genio Politecnico");
 
 	private ImageView imagenGenio = new ImageView(new Image("/imagenes/genio2.png"));
 
-	private Label labelPensar = new Label("Piense en un animal, trataré de adivinarlo");
+	private Label labelPensar = new Label("Piense en un animal, tratare de adivinarlo");
 
 	private Button jugar = new Button("Jugar");
 
