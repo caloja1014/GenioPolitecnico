@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  */
 public class GenioPolitecnico extends Application {
 
-    public static BT<String> arbol = new BT<>();
+    public static BT<String> arbol = BT.cargarArbol();
     public static Stage stage = new Stage();
 
     /**
@@ -35,19 +35,6 @@ public class GenioPolitecnico extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        //creado para la prueba :v
-        arbol.add("es un mamifero?", null);
-        arbol.addLeft("Es domestico?", "es un mamifero?");
-        arbol.addLeft("Un perro", "Es domestico?");
-        arbol.addRight("Es de granja?", "Es domestico?");
-        arbol.addLeft("Una oveja", "Es de granja?");
-        arbol.addRight("Un elefante", "Es de granja?");
-        arbol.addRight("Es un ave?", "es un mamifero?");
-        arbol.addLeft("Un pinguino", "Es un ave?");
-        arbol.addRight("Vive en el oceano?", "Es un ave?");
-        arbol.posOrden();
-        arbol.addLeft("Un calamar", "Vive en el oceano?");
-        arbol.addRight("Una araña", "Vive en el oceano?");
         Inicio inicio = new Inicio();
         Preguntas preguntas = new Preguntas();
         Scene escena = new Scene(inicio.getRoot(), 300, 400);

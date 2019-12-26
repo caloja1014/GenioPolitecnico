@@ -6,9 +6,12 @@
  */
 package arbol;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -126,7 +129,30 @@ public class BT <E> {
             System.out.println(n.getData());
         }
     }
-        
+    public static BT<String> cargarArbol(){
+        BT<String> arbol=new BT<>();
+        Stack<Node<String>> pila=new Stack<>();
+        try(BufferedReader br=new BufferedReader(new FileReader("src/data/arbol.txt"))){
+            String line=null;
+            while((line=br.readLine())!=null){
+                String identificador=line.split(" ")[0];
+                String texto=line.substring(3);
+                if(identificador.equals("#R")){
+                    Node<String> node=new Node<>(texto);
+                    pila.push(node);
+                }else{
+                    Node<String> node=new Node<>(texto);
+                    node.setRight(pila.pop());
+                    node.setLeft(pila.pop());
+                    pila.push(node);
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(BT.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        arbol.setRoot(pila.pop());
+        return arbol;
+    }
     public void guardarArbol() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/data/arbol.txt"))) {
             guardarArbol(root);
