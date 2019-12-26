@@ -27,7 +27,7 @@ public class Desacierto {
 
     private ImageView fondo = new ImageView(new Image("/imagenes/fondoPregunta.jpg"));
 
-    private ImageView imagenGenio = new ImageView(new Image("/imagenes/genioDesacierto.jpg"));
+    private ImageView imagenGenio = new ImageView(new Image("/imagenes/genioDesacierto.png"));
 
     private VBox flowAyudarPrediccion = new VBox();
 

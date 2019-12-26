@@ -18,7 +18,7 @@ public class Inicio {
 
 	private Label labelGenioPolitecnico = new Label("Genio Politecnico");
 
-	private ImageView imagenGenio = new ImageView(new Image("/imagenes/genio2.png"));
+	private ImageView imagenGenio = new ImageView(new Image("/imagenes/genioInicio.png"));
 
 	private Label labelPensar = new Label("Piense en un animal, tratare de adivinarlo");
 

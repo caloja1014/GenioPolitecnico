@@ -31,7 +31,7 @@ public class Preguntas {
 
     private ImageView fondo = new ImageView(new Image("/imagenes/fondoPregunta.jpg"));
 
-    private ImageView imagenGenio = new ImageView(new Image("/imagenes/genio.png"));
+    private ImageView imagenGenio = new ImageView(new Image("/imagenes/genioPreguntas.png"));
 
     private FlowPane flowDePreguntas = new FlowPane();
     private String p;
