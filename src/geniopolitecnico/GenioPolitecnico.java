@@ -6,7 +6,6 @@
 package geniopolitecnico;
 
 import arbol.BT;
-import interfaces.Acierto;
 import interfaces.Desacierto;
 import interfaces.Inicio;
 import interfaces.Preguntas;
