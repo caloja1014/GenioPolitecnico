@@ -23,8 +23,8 @@ import javafx.stage.Stage;
  */
 public class GenioPolitecnico extends Application {
 
-    public static BT<String> arbol = BT.cargarArbol();
-    public static Stage stage = new Stage();
+    public static final BT<String> arbol = BT.cargarArbol();
+    public static final Stage stage = new Stage();
 
     /**
      * @param args the command line arguments
